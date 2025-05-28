@@ -1,0 +1,2 @@
+# OpenAISDK_Working_from_YTPlaylist
+Following this playlist
