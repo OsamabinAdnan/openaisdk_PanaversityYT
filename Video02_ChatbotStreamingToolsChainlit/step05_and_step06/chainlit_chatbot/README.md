@@ -2,6 +2,11 @@
 
 A stateful chatbot built with Chainlit and integrated with Google's Gemini AI model through OpenAI-compatible endpoints.
 
+To see more detail about these steps (step 05 & 06), Check below link
+
+[Step 05 and 06 of ai_agents_first](https://github.com/panaversity/learn-agentic-ai/tree/main/01_ai_agents_first)
+
+
 ## Features
 
 - Stateful conversation management
