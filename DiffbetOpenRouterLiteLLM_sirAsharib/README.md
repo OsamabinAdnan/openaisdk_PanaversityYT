@@ -34,7 +34,8 @@ Each approach has its own advantages and use cases, which are detailed below.
 
 ## OpenRouter Implementation
 
-OpenRouter provides a unified API gateway to access multiple AI models through a single endpoint.
+OpenRouter provides a unified API gateway to access multiple AI models through a single endpoint. Below are the terminal outputs of the file `try_openrouter.py`.
+
 
 ![OpenRouter Architecture](Assets/openrouter.png)
 
@@ -57,7 +58,8 @@ client = OpenAI(
 
 ## LiteLLM Implementation
 
-LiteLLM provides a unified interface for multiple LLM providers with consistent response formats.
+LiteLLM provides a unified interface for multiple LLM providers with consistent response formats. Below is the output of the file `try_litellm.py`.
+
 
 ![LiteLLM Architecture](Assets/liteLLM.png)
 
