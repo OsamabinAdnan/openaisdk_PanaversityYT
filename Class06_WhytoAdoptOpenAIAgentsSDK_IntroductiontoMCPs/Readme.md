@@ -1,0 +1,1 @@
+Check Class 06 content from slide 63 onwards
