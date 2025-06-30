@@ -95,7 +95,9 @@ async def on_chat_start():
 # Event handler for incoming messages: processes user input and generates a response
 @cl.on_message
 async def handle_message(message:cl.Message):
-    await cl.Message(content="Thinking...").send()
+    # Create a reply message
+    reply = await cl.Message(content="⏳ Thinking...").send()
+    # Retrieve conversation history from user session
     history = cl.user_session.get("history", [])
     # Add user message to history
     history.append(
@@ -119,7 +121,9 @@ async def handle_message(message:cl.Message):
         }
     )
     cl.user_session.set("history", history)
+
     # Send the assistant's response to the user
-    await cl.Message(
-        content=result.final_output,
-    ).send()
+    # Update the reply message with the final output
+    reply.content = result.final_output
+    # Update the reply message in the chat
+    await reply.update()
