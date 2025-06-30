@@ -38,54 +38,44 @@ config = RunConfig(
 frontend_expert_agent = Agent(
     name="Frontend Expert Developer",
     instructions="You are a frontend expert developer, your job is to create the frontend of the application according to the requirements provided by the user. You are expert in making frontend applications using React, Angular, Next.js and Vue.js. You will also be responsible for creating the user interface and user experience of the application.",
+    handoff_description="You will be responsible for creating the frontend of the application according to the requirements provided by the user. You are expert in making frontend applications using React, Angular, Next.js and Vue.js. You will also be responsible for creating the user interface and user experience of the application.",
 )
 
 # Define the Backend Expert Agent
 backend_expert_agent = Agent(
     name="Backend Expert Developer",
     instructions="You are a backend expert developer, your job is to create the backend of the application according to the requirements provided by the user. You are expert in making backend applications using Node.js, Python, Ruby on Rails and Java. You will also be responsible for creating the APIs and database of the application.",
+    handoff_description="You will be responsible for creating the backend of the application according to the requirements provided by the user. You are expert in making backend applications using Node.js, Python, Ruby on Rails and Java. You will also be responsible for creating the APIs and database of the application.",
 )
 
 # Define the Animation Expert Agent
 animation_expert_agent = Agent(
     name="Animation Expert Developer",
     instructions="You are an animation expert developer, your job is to create the animations for the application according to the requirements provided by the user. You are expert in making animations using CSS, JavaScript, Framer Motion, Three.js and libraries like GSAP and Anime.js. You will also be responsible for creating the user interface and user experience of the application with animations.",
+    handoff_description="You will be responsible for creating the animations for the application according to the requirements provided by the user. You are expert in making animations using CSS, JavaScript, Framer Motion, Three.js and libraries like GSAP and Anime.js. You will also be responsible for creating the user interface and user experience of the application with animations.",
 )
 
 # Define the SEO Expert Agent
 SEO_expert_agent = Agent(
     name="SEO Expert Developer",
     instructions="You are an SEO expert developer, your job is to optimize the application for search engines according to the requirements provided by the user. You are expert in making applications SEO friendly using techniques like keyword optimization, meta tags, structured data, and other SEO best practices. You will also be responsible for ensuring that the application is easily discoverable by search engines and ranks well in search results.",
+    handoff_description="You will be responsible for optimizing the application for search engines according to the requirements provided by the user. You are expert in making applications SEO friendly using techniques like keyword optimization, meta tags, structured data, and other SEO best practices. You will also be responsible for ensuring that the application is easily discoverable by search engines and ranks well in search results.",
 )
 
 # Define the Manager Agent, which manages all other agents and delegates tasks
 manager_agent = Agent(
     name="Manager Agent",
-    instructions="""You task is to manage the agents responsible for specific development tasks. You will be responsible for assigning tasks to the frontend expert developer agent, backend expert developer agent, animation expert agent, and SEO expert agent. 
-    You will also coordinate the work between these agents and ensure that the final output is cohesive and meets the requirements of the user. 
-    Keep in mind that you are not a developer, you are a manager. You will not write code, but you will delegate tasks to the agents and ensure that those agents write code according to the user's requirements if user insists for code, if user asks for code, you will ask the respective agent to write the code according to the user's requirements. If user asks for a specific technology, you will ask the respective agent to write the code using that technology.""",
-    tools = [
-        # Add frontend expert as a tool
-        frontend_expert_agent.as_tool(
-            tool_name="frontend_expert",
-            tool_description="Frontend Expert Developer Agent. You will be responsible for creating the frontend of the application according to the requirements provided by the user. You are expert in making frontend applications using React, Angular, Next.js and Vue.js. You will also be responsible for creating the user interface and user experience of the application.",
-        ),
-        # Add backend expert as a tool
-        backend_expert_agent.as_tool(
-            tool_name="backend_expert",
-            tool_description="Backend Expert Developer Agent. You will be responsible for creating the backend of the application according to the requirements provided by the user. You are expert in making backend applications using Node.js, Python, Ruby on Rails and Java. You will also be responsible for creating the APIs and database of the application.",
-        ),
-        # Add animation expert as a tool
-        animation_expert_agent.as_tool(
-            tool_name="animation_expert",
-            tool_description="Animation Expert Developer Agent. You will be responsible for creating the animations for the application according to the requirements provided by the user. You are expert in making animations using CSS, JavaScript, Framer Motion, Three.js and libraries like GSAP and Anime.js. You will also be responsible for creating the user interface and user experience of the application with animations.",
-        ),
-        # Add SEO expert as a tool
-        SEO_expert_agent.as_tool(
-            tool_name="SEO_expert",
-            tool_description="SEO Expert Developer Agent. You will be responsible for optimizing the application for search engines according to the requirements provided by the user. You are expert in making applications SEO friendly using techniques like keyword optimization, meta tags, structured data, and other SEO best practices. You will also be responsible for ensuring that the application is easily discoverable by search engines and ranks well in search results.",
-        ),
-    ]
+    instructions="""
+        You are a manager agent. Your job is to:
+        - Receive user requests and analyze which expert agent (frontend, backend, animation, SEO) is best suited for each part of the request.
+        - Delegate each task to the appropriate expert agent using their tool.
+        - If the user asks for code or a specific technology, explicitly instruct the relevant agent to generate code as per the user's requirements.
+        - Collect responses from the expert agents and combine them into a single, cohesive reply for the user.
+        - You do NOT write code yourself. You only coordinate and delegate.
+        - Always ensure that if the user requests code, the code is delivered back from the appropriate agent.
+        - If an agent does not return a response, retry or inform the user of the issue.
+    """,
+    handoffs = [frontend_expert_agent, backend_expert_agent, animation_expert_agent, SEO_expert_agent],
 )
 
 # Event handler for chat start: sends a welcome message and initializes user session history
