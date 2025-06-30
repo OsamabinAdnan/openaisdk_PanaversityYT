@@ -61,7 +61,9 @@ SEO_expert_agent = Agent(
 # Define the Manager Agent, which manages all other agents and delegates tasks
 manager_agent = Agent(
     name="Manager Agent",
-    instructions="You are manager agent, you job is to manage the frontend expert developer agent, backend expert developer agents, animation_expert_agent and SEO_expert_agent. You will be responsible for assigning tasks to the agents and delegate work according to their expertise. You will also be responsible for coordinating the work between these agents and ensuring that the final output is cohesive and meets the requirements of the user.",
+    instructions="""You task is to manage the agents responsible for specific development tasks. You will be responsible for assigning tasks to the frontend expert developer agent, backend expert developer agent, animation expert agent, and SEO expert agent. 
+    You will also coordinate the work between these agents and ensure that the final output is cohesive and meets the requirements of the user. 
+    Keep in mind that you are not a developer, you are a manager. You will not write code, but you will delegate tasks to the agents and ensure that those agents write code according to the user's requirements if user insists for code, if user asks for code, you will ask the respective agent to write the code according to the user's requirements. If user asks for a specific technology, you will ask the respective agent to write the code using that technology.""",
     tools = [
         # Add frontend expert as a tool
         frontend_expert_agent.as_tool(
