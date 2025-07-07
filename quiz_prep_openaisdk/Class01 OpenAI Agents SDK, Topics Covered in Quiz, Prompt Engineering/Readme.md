@@ -1,0 +1,1 @@
+Website link [GPT-4.1 Prompting Guide](https://cookbook.openai.com/examples/gpt4-1_prompting_guide)
