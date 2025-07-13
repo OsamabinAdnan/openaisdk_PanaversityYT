@@ -84,6 +84,8 @@ Blockquotes can be nested. Add a >> in front of the paragraph you want to nest.
 > Dorothy followed her through many of the beautiful rooms in her castle.
 >
 >> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+>>> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+>>>> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
 
 ## **Blockquotes with Other Elements**
 Blockquotes can contain other Markdown formatted elements. Not all elements can be used — you’ll need to experiment to see which ones work.
@@ -98,3 +100,52 @@ Blockquotes can contain other Markdown formatted elements. Not all elements can 
 ## **Blockquotes Best Practices**
 
 For compatibility, put blank lines before and after blockquotes.
+
+# 👉 **Lists**
+
+You can organize items into ordered and unordered lists.
+
+## **Ordered Lists**
+
+To create an ordered list, add line items with numbers followed by periods. The numbers don’t have to be in numerical order, but the list should start with the number one.
+
+1. First item
+2. Second item
+3. Third item
+    1. Indented item
+    2. Indented item
+    3. Indented item
+        1. Sub-indented item
+        2. Sub-indented item
+4. Fourth item
+
+## **Unordered Lists**
+
+To create an unordered list, add dashes (-), asterisks (*), or plus signs (+) in front of line items. Indent one or more items to create a nested list.
+
+- First item
+- Second item
+* Third item
+* Fourth item
++ Fifth item
++ Sixth item
+
+---
+
+- First item
+- Second item
+- Third item
+    + Indented item
+    + Indented item
+        * Sub-indented item
+        * Sub-indented item
+            - Sub-indented item
+            - Sub-indented item
+- Fourth item
+
+## **Starting Unordered List Items With Numbers**
+
+If you need to start an unordered list item with a number followed by a period, you can use a backslash (\) to escape the period.
+
+- 1968\. A great year!
+- I think 1969 was second best.
