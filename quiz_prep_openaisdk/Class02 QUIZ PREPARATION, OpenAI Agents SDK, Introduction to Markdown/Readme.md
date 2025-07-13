@@ -149,3 +149,191 @@ If you need to start an unordered list item with a number followed by a period, 
 
 - 1968\. A great year!
 - I think 1969 was second best.
+
+## **Adding Elements in Lists**
+
+To add another element in a list while preserving the continuity of the list, indent the element four spaces or one tab, as shown in the following examples.
+
+### **Paragraphs**
+
+* This is the first list item.
+* Here's the second list item.
+
+    I need to add another paragraph below the second list item.
+
+* And here's the third list item.
+
+### **Blockquotes**
+
+* This is the first list item.
+* Here's the second list item.
+
+    > A blockquote would look great below the second list item.
+
+* And here's the third list item.
+
+# 👉 **Code Blocks**
+
+Code blocks are normally indented four spaces or one tab. When they’re in a list, indent them eight spaces or two tabs.
+
+1. Open the file.
+2. Find the following code block on line 21:
+
+        <html>
+          <head>
+            <title>Test</title>
+          </head>
+
+3. Update the title to match the name of your website.
+
+4. Below is python code
+
+    ```python
+
+    import requests
+    response = requests.get('https://api.github.com')
+    print(response.status_code)
+
+    ```
+
+5. Below is JavaScript code
+
+    ```JavaScript
+
+    x = 5;
+    y = 6;
+    console.log(x + y);
+    
+    ```
+
+# 👉 **Code**
+
+To denote a word or phrase as code, enclose it in backticks (`).
+
+At the command prompt, type `nano`.
+
+## **Escaping Backticks**
+
+If the word or phrase you want to denote as code includes one or more backticks, you can escape it by enclosing the word or phrase in double backticks (``).
+
+``Use `code` in your Markdown file.``
+
+## **Code Blocks**
+To create code blocks, indent every line of the block by at least four spaces or one tab.
+    
+    <html>
+      <head>
+      </head>
+    </html>
+
+```html
+    <html>
+      <head>
+      </head>
+    </html>
+```
+
+# 👉 **Horizontal Rules**
+To create a horizontal rule, use three or more asterisks (***), dashes (---), or underscores (___) on a line by themselves.
+
+***
+
+---
+
+___
+
+# 👉 **Links**
+
+To create a link, enclose the link text in brackets (e.g., [Duck Duck Go]) and then follow it immediately with the URL in parentheses (e.g., (https://duckduckgo.com)).
+
+My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
+
+## **Adding Titles**
+
+You can optionally add a title for a link. This will appear as a tooltip when the user hovers over the link. To add a title, enclose it in quotation marks after the URL.
+
+My favorite search engine is [Duck Duck Go](https://duckduckgo.com "The best search engine for privacy").
+
+## **URLs and Email Addresses**
+To quickly turn a URL or email address into a link, enclose it in angle brackets.
+
+<https://www.markdownguide.org>
+
+<fake@example.com>
+
+## **Formatting Links**
+
+To emphasize links, add asterisks before and after the brackets and parentheses. To denote links as code, add backticks in the brackets.
+
+I love supporting the **[EFF](https://eff.org "This is https://eff.org")**.
+
+This is the *[Markdown Guide](https://www.markdownguide.org)*.
+
+See the section on [`code`](#code).
+
+## **Reference-style Links**
+
+Reference-style links are a special kind of link that make URLs easier to display and read in Markdown. Reference-style links are constructed in two parts: the part you keep inline with your text and the part you store somewhere else in the file to keep the text easy to read.
+
+Say you add a URL as a standard URL link to a paragraph and it looks like this in Markdown:
+
+In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends
+of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to
+eat: it was a [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles"), and that means comfort.
+
+Another example:
+
+In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends
+of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to
+eat: it was a [hobbit-hole][1], and that means comfort.
+
+[1]:<https://en.wikipedia.org/wiki/Hobbit#Lifestyle> "Hobbit lifestyles"
+
+# 👉 **Images**
+
+To add an image, add an exclamation mark (!), followed by alt text in brackets, and the path or URL to the image asset in parentheses. You can optionally add a title in quotation marks after the path or URL.
+
+1. Open the file containing the Linux mascot.
+2. Marvel at its beauty.
+
+    ![Tux, the Linux mascot](https://mdg.imgix.net/assets/images/tux.png?auto=format&fit=clip&q=40&w=100)
+
+3. Close the file.
+
+Another example:
+
+![The San Juan Mountains are beautiful!](https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080 "San Juan Mountains")
+
+## **Linking Images**
+
+To add a link to an image, enclose the Markdown for the image in brackets, and then add the link in parentheses.
+
+[![An old rock in the desert](https://mdg.imgix.net/assets/images/shiprock.jpg?auto=format&fit=clip&q=40&w=1080 "Shiprock, New Mexico by Beau Rogers")](https://www.flickr.com/photos/beaurogers/31833779864/in/photolist-Qv3rFw-34mt9F-a9Cmfy-5Ha3Zi-9msKdv-o3hgjr-hWpUte-4WMsJ1-KUQ8N-deshUb-vssBD-6CQci6-8AFCiD-zsJWT-nNfsgB-dPDwZJ-bn9JGn-5HtSXY-6CUhAL-a4UTXB-ugPum-KUPSo-fBLNm-6CUmpy-4WMsc9-8a7D3T-83KJev-6CQ2bK-nNusHJ-a78rQH-nw3NvT-7aq2qf-8wwBso-3nNceh-ugSKP-4mh4kh-bbeeqH-a7biME-q3PtTf-brFpgb-cg38zw-bXMZc-nJPELD-f58Lmo-bXMYG-bz8AAi-bxNtNT-bXMYi-bXMY6-bXMYv)
+
+# 👉 **Escaping Characters**
+
+To display a literal character that would otherwise be used to format text in a Markdown document, add a backslash (\) in front of the character.
+
+\* Without the backslash, this would be a bullet in an unordered list
+
+## **Characters You Can Escape**
+
+You can use a backslash to escape the following characters.
+
+| Character | Name |
+|-----------|------|
+| \\        | Backslash |
+| \`        | Backtick (see also [escaping backticks in code](https://www.markdownguide.org/basic-syntax/#escaping-backticks)) |
+| \*        | Asterisk |
+| \_        | Underscore |
+| \{ \}     | Curly brace |
+| \[ \]     | Square bracket |
+| \( \)     | Parenthesis |
+| \< \>     | Angle bracket |
+| \#        | Pound sign |
+| \+        | Plus sign |
+| \-        | Minus sign |
+| \.        | Dot |
+| \!        | Exclamation mark |
+| \|        | Pipe (see also [escaping pipes in tables](https://www.markdownguide.org/extended-syntax/#escaping-pipe-characters-in-tables))|
+
