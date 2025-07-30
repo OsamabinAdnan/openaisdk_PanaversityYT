@@ -43,12 +43,16 @@ agent = Agent(
     # tool_use_behavior=StopAtTools(stop_on_first_tool=['human_review']),
     model_settings=ModelSettings(tool_choice="required"),
     reset_tool_choice=False,
+    
 )
 
-result = Runner.run_sync(
-    agent,
-    input="Hello, What is the sum of 5 and 10? after result, ask the human to review.",
-    context=None,
-)
+print(agent.tools)
 
-print("Agent Response:", result.final_output)
+# result = Runner.run_sync(
+#     agent,
+#     input="Hello, What is the sum of 5 and 10? after result, ask the human to review.",
+#     context=None,
+#     max_turns=5, # Maximum number of turns to run the agent
+# )
+
+# print("Agent Response:", result.final_output)
