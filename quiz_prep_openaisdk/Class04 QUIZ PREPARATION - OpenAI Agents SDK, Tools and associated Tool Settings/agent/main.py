@@ -46,13 +46,14 @@ agent = Agent(
     
 )
 
-print(agent.tools)
+# print(agent.tools)
 
-# result = Runner.run_sync(
-#     agent,
-#     input="Hello, What is the sum of 5 and 10? after result, ask the human to review.",
-#     context=None,
-#     max_turns=5, # Maximum number of turns to run the agent
-# )
+result = Runner.run_sync(
+    agent,
+    input="Hello, What is the sum of 5 and 10? after result, ask the human to review.",
+    context=None,
+    max_turns=5, # Maximum number of turns to run the agent
+)
 
-# print("Agent Response:", result.final_output)
+print("Agent Response:", result.final_output)
+
