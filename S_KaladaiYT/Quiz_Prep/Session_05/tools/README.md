@@ -52,4 +52,12 @@
                 """
                 return a + b
             ```
-    
+    - `use_docstring_info:`
+    - `failure_error_function:`
+    - `is_enabled:`
+
+- **`Function Tool (Class)`**
+    - `name`
+    - `description`
+    - `params_json_schema`
+    - `on_invoke_tool`

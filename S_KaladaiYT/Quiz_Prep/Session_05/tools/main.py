@@ -1,4 +1,4 @@
-from agents import Agent, Runner, function_tool, OpenAIChatCompletionsModel, RunConfig, enable_verbose_stdout_logging, Tool
+from agents import Agent, Runner, function_tool, OpenAIChatCompletionsModel, RunConfig, enable_verbose_stdout_logging, Tool, RunContextWrapper
 from openai import AsyncOpenAI
 from openai.types.shared import Reasoning
 from dotenv import load_dotenv
@@ -62,9 +62,11 @@ run_config = RunConfig(
         name_override="Addition_function",
         description_override="This function will calculate the sum of two numbers.",
         docstring_style="google",
-        use_docstring_info=False,
+        use_docstring_info=True,
+        is_enabled=True
 )
 def add_two_numbers(a: int, b: int) -> str:
+    
     """Add two numbers.
     
     Args:
@@ -74,9 +76,10 @@ def add_two_numbers(a: int, b: int) -> str:
     Returns:
         str: The sum of the two numbers.
     """
-
     result = a + b
     return f"The sum of {a} and {b} is {result}"
+        
+
 
 agent = Agent(
     name="Assitant",
