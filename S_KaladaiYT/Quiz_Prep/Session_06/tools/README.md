@@ -51,3 +51,35 @@
     Whether to reset the tool choice to the default value after a tool has been called. Defaults
     to True. This ensures that the agent doesn't enter an infinite loop of tool usage.
 
+    * **`(Agent) as_tool (method):`**
+        ```python
+        def as_tool(
+            self,
+            tool_name: str | None,
+            tool_description: str | None,
+            custom_output_extractor: Callable[[RunResult], Awaitable[str]] | None = None,
+            is_enabled: bool
+            | Callable[[RunContextWrapper[Any], AgentBase[Any]], MaybeAwaitable[bool]] = True,
+        ) -> Tool:
+        ```
+        - Transform this agent into a tool, callable by other agents.
+
+            This is different from handoffs in two ways:
+            1) In handoffs, the new agent receives the conversation history. In this tool, the new agent
+            receives generated input.
+            2) In handoffs, the new agent takes over the conversation. In this tool, the new agent is
+            called as a tool, and the conversation is continued by the original agent.
+            Args:
+                * `tool_name:` The name of the tool. If not provided, the agent's name will be used.
+                * `tool_description:` The description of the tool, which should indicate what it does and
+                    when to use it.
+                * `custom_output_extractor:` A function that extracts the output from the agent. If not
+                    provided, the last message from the agent will be used.
+                * `is_enabled:` Whether the tool is enabled. Can be a bool or a callable that takes the run
+                    context and agent and returns whether the tool is enabled. Disabled tools are hidden
+                    from the LLM at runtime.
+
+        - In OpenAI SDK, a `workflow` is the execution `trace` of how an agent handles a user query.
+            * ***The main agent receives the input, decides whether to answer directly or call a tool.***
+            * ***If a tool is called, it may itself be another specialized agent that processes the query and returns the result.***
+            * ***Finally, the main agent collects that result and delivers the response back to the user.***
