@@ -6,3 +6,7 @@
     - `InputGuardrailTripwireTriggered`
     - `TResponseInputItem`
 
+**2) Output Guardrail**
+    - `@output_guardrail`
+    - `GuardrailFunctionOutput`
+    - `OutputGuardrailTripwireTriggered`
