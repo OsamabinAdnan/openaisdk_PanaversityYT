@@ -1,12 +1,14 @@
 from dotenv import load_dotenv
 import os
-from agents import Agent, Runner, OpenAIChatCompletionsModel, RunContextWrapper, function_tool
+from agents import Agent, Runner, OpenAIChatCompletionsModel, RunContextWrapper, function_tool, enable_verbose_stdout_logging
 from openai import AsyncOpenAI
 from rich import print
 from dataclasses import dataclass
 
 
 load_dotenv()
+
+enable_verbose_stdout_logging()
 
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 if not gemini_api_key:
@@ -60,6 +62,7 @@ async def check_balance(ctx:RunContextWrapper[BankContext], account_number:str) 
         return f"Account number: {account_number} not found"
 
 
+
 bank_context = BankContext(
     account_data=account_database
 )
@@ -75,8 +78,8 @@ main_agent = Agent(
 
 result = Runner.run_sync(
     main_agent,
-    "Hello! Check my balance, account no is 4546",
-    context=bank_context
+    "Hello! What is current balance of account number 1234?",
+    context=bank_context,
 )
 
 print(f"\n{result.final_output}\n")
