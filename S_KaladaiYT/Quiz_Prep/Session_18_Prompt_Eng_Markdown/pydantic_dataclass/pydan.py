@@ -12,6 +12,7 @@ print("Name", user.name)
 print("Age: ", user.age)
 print("Json: ",user.model_dump_json())
 print(f"Dictionary: {user.model_dump()}\n")
+print(f"Schema: {user.model_json_schema()}")
 
 
 
