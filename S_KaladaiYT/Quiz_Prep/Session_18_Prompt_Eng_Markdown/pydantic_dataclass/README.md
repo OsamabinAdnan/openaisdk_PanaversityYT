@@ -1,0 +1,3 @@
+- Pydantic used for data validation using BaseModel
+- If we import dataclasses `from pydantic.dataclasses import dataclass`, it will validate type hints
+- But when we import dataclass `from dataclasses import dataclass`, it only give structure to data, it doesnt validate type hints
