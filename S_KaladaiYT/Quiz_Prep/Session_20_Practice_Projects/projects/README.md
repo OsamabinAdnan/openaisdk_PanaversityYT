@@ -340,4 +340,13 @@
     * You have to pass `input_history` in filter then you can play with `pre_handoff_items` and `new_items`
 
 - **`09:`**
-   
+    * handoff, function tool in same code
+
+- **`10:`**
+    * `is_enable` from function_tool and `tool_choice` None from model setting
+
+- **`11:`**
+    * Guardrails
+
+- **`12:`**
+    * RunHooks
