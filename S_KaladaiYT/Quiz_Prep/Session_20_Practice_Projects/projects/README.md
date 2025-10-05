@@ -15,3 +15,9 @@
 
 - **`05:`**
     * tool choice required in Model Setting
+
+- **`06:`**
+    * tool choice required in Model Setting but max turn is 1
+
+- **`07:`**
+    * handoff function and its parameters
