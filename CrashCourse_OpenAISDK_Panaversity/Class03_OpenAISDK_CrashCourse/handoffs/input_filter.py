@@ -6,11 +6,13 @@ from agents import Agent, RunContextWrapper, Runner, OpenAIChatCompletionsModel,
 from openai import AsyncOpenAI
 from agents.extensions import handoff_filters
 from rich import print
+from pydantic import BaseModel
+
 
 
 load_dotenv()
 
-enable_verbose_stdout_logging()
+# enable_verbose_stdout_logging()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
@@ -32,6 +34,10 @@ llm_model: OpenAIChatCompletionsModel = OpenAIChatCompletionsModel(
     openai_client=external_client
 )
 
+# Class for is_enabled context
+class CurrentUser(BaseModel):
+    is_logged_in: bool
+
 refund_agent = Agent(
     name="Refund agent",
     instructions="You are a refund agent. Answer related to refund questions.",
@@ -39,11 +45,19 @@ refund_agent = Agent(
     handoff_description="You are a refund agent. You work on user refund queries related to order.",
 )
 
+async def refund_agent_enabler(local_context:RunContextWrapper[CurrentUser], agent:Agent) -> bool:
+    print(f"local_context: {local_context.context}")
+    print(f"agent: {agent.name}")
+    if local_context.context and local_context.context.is_logged_in:
+        return True
+    return False
+
+
 handoff_object = handoff(
     agent=refund_agent,
     tool_name_override="order_refund_tool",
     tool_description_override="You are order refund tool, you work on refund queries related to order.",
-    is_enabled=True,
+    is_enabled=refund_agent_enabler,
     input_filter=handoff_filters.remove_all_tools
 )
 
@@ -55,10 +69,12 @@ triage_agent = Agent(
 )
 
 async def main():
+    current_user = CurrentUser(is_logged_in=True)
     result = await Runner.run(
         triage_agent, 
         "I want to refund my order, order details are following: Order ID: 12345, Order amount: $100.00, Order date: 2022-01-01, reason: I don't like the product, and I have product in my hands",
         # "hi, how are you?"
+        context=current_user
     )
 
     print(f"\nResponse:{result.final_output}")
