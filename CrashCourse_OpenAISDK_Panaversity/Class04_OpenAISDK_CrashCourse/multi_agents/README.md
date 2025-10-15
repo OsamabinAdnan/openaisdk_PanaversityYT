@@ -6,6 +6,7 @@
     * via LLM
 - LLm as Judge
 - Parallelization
+- [Streaming Guardrails](https://github.com/openai/openai-agents-python/blob/main/examples/agent_patterns/streaming_guardrails.py)
 
 
 ### **Python**
