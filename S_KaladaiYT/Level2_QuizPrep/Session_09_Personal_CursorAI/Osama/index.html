@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated To-Do List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #4a90e2;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #4a90e2;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            border-radius: 5px;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 25px;
+            gap: 10px;
+        }
+
+        .input-group input[type="text"] {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-group input[type="text"]:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .input-group button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group button:hover {
+            background-color: #4cae4c;
+            transform: translateY(-2px);
+        }
+
+        .input-group button:active {
+            transform: translateY(0);
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 0;
+            scrollbar-width: thin;
+            scrollbar-color: #4a90e2 #f1f1f1;
+        }
+
+        .task-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .task-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .task-list::-webkit-scrollbar-thumb {
+            background-color: #4a90e2;
+            border-radius: 10px;
+            border: 2px solid #f1f1f1;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            animation: slideIn 0.4s ease-out forwards;
+            position: relative;
+            opacity: 0; /* Start hidden for animation */
+            transform: translateX(-100%); /* Start off-screen */
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .task-item.fade-out {
+            animation: fadeOut 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100%); height: 0; padding: 0; margin: 0; border: none; }
+        }
+
+        .task-item span {
+            flex-grow: 1;
+            text-align: left;
+            font-size: 17px;
+            color: #555;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .task-item.completed span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .task-item .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .task-item button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .task-item .complete-btn {
+            color: #28a745;
+        }
+
+        .task-item .complete-btn:hover {
+            color: #218838;
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: scale(1.1);
+        }
+
+        .task-item .delete-btn {
+            color: #dc3545;
+        }
+
+        .task-item .delete-btn:hover {
+            color: #c82333;
+            background-color: rgba(220, 53, 69, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 25px;
+                margin: 20px;
+            }
+
+            .input-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .input-group button {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .task-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .task-item .actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+        <ul id="taskList" class="task-list">
+            <!-- Tasks will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskInput = document.getElementById('taskInput');
+            const addTaskBtn = document.getElementById('addTaskBtn');
+            const taskList = document.getElementById('taskList');
+
+            // Load tasks from Local Storage
+            loadTasks();
+
+            addTaskBtn.addEventListener('click', addTask);
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+
+            function addTask() {
+                const taskText = taskInput.value.trim();
+                if (taskText === '') {
+                    alert('Please enter a task!');
+                    return;
+                }
+
+                const taskId = Date.now(); // Unique ID for each task
+                const taskItem = createTaskElement(taskText, false, taskId);
+                taskList.appendChild(taskItem);
+
+                saveTask({ id: taskId, text: taskText, completed: false });
+                taskInput.value = '';
+            }
+
+            function createTaskElement(taskText, completed, id) {
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                if (completed) {
+                    li.classList.add('completed');
+                }
+                li.dataset.id = id;
+
+                const span = document.createElement('span');
+                span.textContent = taskText;
+                span.addEventListener('click', () => toggleTaskComplete(li));
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'actions';
+
+                const completeBtn = document.createElement('button');
+                completeBtn.className = 'complete-btn';
+                completeBtn.innerHTML = '&#10003;'; // Checkmark
+                completeBtn.title = 'Mark as complete';
+                completeBtn.addEventListener('click', () => toggleTaskComplete(li));
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerHTML = '&#10007;'; // Cross mark
+                deleteBtn.title = 'Delete task';
+                deleteBtn.addEventListener('click', () => deleteTask(li));
+
+                actionsDiv.appendChild(completeBtn);
+                actionsDiv.appendChild(deleteBtn);
+                li.appendChild(span);
+                li.appendChild(actionsDiv);
+
+                return li;
+            }
+
+            function toggleTaskComplete(taskItem) {
+                taskItem.classList.toggle('completed');
+                updateTaskInStorage(taskItem.dataset.id, taskItem.classList.contains('completed'));
+            }
+
+            function deleteTask(taskItem) {
+                taskItem.classList.add('fade-out');
+                taskItem.addEventListener('animationend', () => {
+                    taskItem.remove();
+                    removeTaskFromStorage(taskItem.dataset.id);
+                });
+            }
+
+            function saveTask(task) {
+                const tasks = getTasksFromStorage();
+                tasks.push(task);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+
+            function getTasksFromStorage() {
+                const tasksString = localStorage.getItem('tasks');
+                return tasksString ? JSON.parse(tasksString) : [];
+            }
+
+            function loadTasks() {
+                const tasks = getTasksFromStorage();
+                tasks.forEach(task => {
+                    const taskItem = createTaskElement(task.text, task.completed, task.id);
+                    taskList.appendChild(taskItem);
+                });
+            }
+
+            function updateTaskInStorage(id, completed) {
+                const tasks = getTasksFromStorage();
+                const taskIndex = tasks.findIndex(task => task.id == id);
+                if (taskIndex > -1) {
+                    tasks[taskIndex].completed = completed;
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                }
+            }
+
+            function removeTaskFromStorage(id) {
+                let tasks = getTasksFromStorage();
+                tasks = tasks.filter(task => task.id != id);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+        });
+    </script>
+</body>
+</html>
